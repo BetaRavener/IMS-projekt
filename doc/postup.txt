@@ -1,0 +1,21 @@
+Postup:
+1. Brain storming experimentov
+2. Analyza navrhnutych experimentov s ohladom na pozadovane data
+3. Vyber uskutocnitelnych experimentov s ohladom na dostupnost dat
+4. Identifikacia dokumentov obsahujucich potrebne data, extrakcia dat (UVIEST ZDROJ ODKIAL!) - do 29.11
+5. Navrh finalneho modelu - do 30.11
+6. Implementacia modelu - do 4.12
+7. Realizacia experimentov - do 6.12
+8. Napisanie technickej spravy - do 8.12
+8.12 - posledne upravy
+
+Ako je riesene zamrzanie riek v zime na dopravnych kanaloch / prieplavoch
+Ako zamrzanie riek a poveternostne podmienky ovplyvnuju prepravne kapacity na riekach
+Zavisi doba precerpavania od hmotnosti lode?
+
+Napad pre postupnu dostavbu systemu
+V usekoch, ktore su nedokoncene uvazovat vyssie prepravne naklady
+Na rozmedzi dostavaneho a nedokonceneho useku uvazovat cas prekladky
+Na nedokoncenom useku uvazovat iny cas prepravy - pravdepodobne kratsi
+Na zaciatku je cely system nedokonceny, na usekoch prebieha len automobilova doprava
+
