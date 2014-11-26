@@ -1,0 +1,64 @@
+Zistitelne udaje:
+- cena prepravy 1 t na 1 km pre automobilovu, zeleznicnu aj lodnu dopravu
+- naklady na stavbu jednotlivych usekov (etap)
+- sadzba na jednotlivych usekoch, rozna pri plavbe tam a spet
+- dlzka usekov, podrobna mapa s vodnymi dielami
+- zisk na myte na jednotlivych usekoch
+- odhadovane mnozstvo tovaru k preprave
+- odhad rocneho rastu mnozstva prepravovaneho tovaru
+
+Tazko zistitelne / nezistitelne:
+- Presne mnozstvo prepravovaneho tovaru medzi kazdymi 2 miestami (PaVC ale obsahuje
+  celkom podrobnu analyzu, ktora by sa dala pre tento ucel v krajnom pripade pouzit)
+  
+Tazko modelovatelne:
+- Postupne dokoncovanie usekov. Kazdy dokonceny usek vyrazne meni model a prepravovane
+  mnozstvo, napriklad dokoncenim prvej etapy dojde len k napojeniu ceskych miest,
+  no dokoncenim tretej dojde k prepojeniu na severne more co ma velky vyznam na
+  predpokladane vyuzitie vodnej cesty.
+  
+Experimenty:
+- Ci jeden zbudovany usek dokaze financovat stavbu dalsieho - zjednodusenie moze
+  byt experiment: vynosi konkretneho useku.
+- Kolko lodi treba do systemu generovat, aby bol rentabilny - ake je minimalne
+  vyuzitie vodnej trasy aby malo zmysel ju budovat.
+- Maximalna efektivna prepravna kapacita - kolko lodi je mozne do systemu generovat
+  aby nevznikali prilis velke fronty / lod necakala na obsluhu prilis dlho.
+- Za kolko sa navratia investicie pri pribliznej realnej prepave. Moznost uvazovat
+  postupne dokoncovanie - model bude presnejsi a dojde k skorsej navratnosti.
+  Postupne dokoncovanie je narocne na modelovanie!
+- Ako ziskove je dielo pri maximalnej kapacite.
+- Kedy dojde k prekroceniu maximalnej kapacity pri uvazovani s rocnym narastom
+  prepravy a ktore miesta budu prepravu najviac brzdit.
+
+  
+Model prepravy:
+- Zvysena produkcia lodi do systemu v miestach pripojenia na ine vyznamne toky
+- Pri vytvoreni lode do systemu sa musi urcit destinacia:
+    - Pravdepodobnostne rozlozenie podla vzdialenosti plavby, preferuju sa
+      dlhsie trasy a teda su pravdepodobnejsie
+    - Priorita, vecsie pristavy maju vecsi vyznam a teda budu pravdepodobnejsiou
+      destinaciou.
+- Destinacia moze byt:  - pristav v systeme D-O-L
+                        - miesto napojenia na iny vyznamny tok
+- Cim vecsi pristav, tym vecsia pravdepodobnost ze lod vychadzajuca z neho sa
+  bude plavit na vecsiu vzdialenost.
+- Potreba modelovat vsetky vyznamnejsie stavby na trase aby mohla byt presne
+  zistovana kapacita.
+
+Priblizna realna preprava:
+- uvazenie odhadov o preprave na vodnom diele zo studie PaVC
+- uvazenie vysledkov experimentov s minimalnym potrebnym vyuzitim a maximalnou
+  kapacitou.
+
+Otazky:
+- modelovat rozne typy plavidiel s roznym vykonom, prepravnou kapacitou,
+  rychlostou, velkostou, atd.
+- Ako ovplyvnuje zamrzanie riek prepravu?
+- Zavisi doba precerpavania od hmotnosti lode?
+
+Potrebne parametre (bude priebezne doplnene):
+- Rozmiestnenie stavieb na vodnom diele - kilometer, typ,..
+- Zdrzanie na jednotlivych typov stavieb
+- Plavebna rychlost
+- Kapacita pristavov, doba vykladky,...

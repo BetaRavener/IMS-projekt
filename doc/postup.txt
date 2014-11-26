@@ -19,3 +19,14 @@ Na rozmedzi dostavaneho a nedokonceneho useku uvazovat cas prekladky
 Na nedokoncenom useku uvazovat iny cas prepravy - pravdepodobne kratsi
 Na zaciatku je cely system nedokonceny, na usekoch prebieha len automobilova doprava
 
+dolezite parametre plavebnych komor (google?):
+- pocet komor
+- vyska - nizka / vysoka?
+- precerpavacia doba
+- strana 44 PaVC
+
+Predbezne neuvazovat pripady zdvojenia plavebnych komor! Ale spomenut plany..
+Problem s postupnou dostavbou - budu sa vyrazne menit prepravovane mnozstva..
+
+
+Experiment - pri experimentalne urcenej maximalnej kapacite a predpokladanom raste prepravy, kedy dojde ku kritickemu stavu? Porovnat s vysledkami na strane 116 PaVC.
