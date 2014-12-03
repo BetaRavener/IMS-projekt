@@ -11,7 +11,18 @@ Place::Place() :
     next(nullptr),
     nextDistance(0),
     previous(nullptr),
-    previousDistance(0)
+    previousDistance(0),
+    name("")
+{
+
+}
+
+Place::Place(std::string name) :
+    next(nullptr),
+    nextDistance(0),
+    previous(nullptr),
+    previousDistance(0),
+    name(name)
 {
 
 }
@@ -19,6 +30,11 @@ Place::Place() :
 Place::~Place()
 {
 
+}
+
+std::string Place::getName()
+{
+    return name;
 }
 
 void Place::connect(Place* place, double distance)

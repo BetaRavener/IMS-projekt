@@ -12,6 +12,10 @@ Pathway::Pathway(Place* origin, double distance) :
     distance(distance)
 {}
 
+Crossroad::Crossroad() :
+    Place("Crossroad")
+{}
+
 void Crossroad::SailProcedure(Ship &ship)
 {
     Place* dest = ship.getDestination();

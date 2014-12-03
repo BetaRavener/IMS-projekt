@@ -12,6 +12,7 @@
 #define HIGH_LOCK_PUMPING_RATE 25.4545 // in seconds / meter
 
 ShipLock::ShipLock(const char* name, double height, Direction riseDirection, int chamberCount) :
+    Place(name),
     riseDirection(riseDirection)
 {
     for (int i = 0; i < chamberCount; i++)

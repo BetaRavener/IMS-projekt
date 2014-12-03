@@ -24,6 +24,8 @@ struct Pathway
 class Crossroad : public Place
 {
 public:
+    Crossroad();
+
     virtual void SailProcedure(Ship &ship);
     virtual void Output();
 

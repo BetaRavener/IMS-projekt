@@ -10,6 +10,7 @@
 #define MAX_TUNNEL_SPEED (9.28 / 3.6) // in meters / second
 
 Tunnel::Tunnel(const char* name, double length, unsigned int minGroupSize) :
+    Place(name),
     queueA("queueA"),
     queueB("queueB"),
     wholeTunnel(name),

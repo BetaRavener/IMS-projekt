@@ -8,6 +8,8 @@
 #ifndef PLACE_H_
 #define PLACE_H_
 
+#include <string>
+
 class Ship;
 
 enum class Direction {ToCrossroad, ToEndpoint};
@@ -16,6 +18,9 @@ class Place
 {
 public:
     Place();
+    Place(std::string name);
+
+    std::string getName();
 
     virtual void SailProcedure(Ship &ship) = 0;
     virtual void Output() = 0;
@@ -32,6 +37,7 @@ protected:
 private:
     Place* previous;
     double previousDistance;
+    std::string name;
 };
 
 

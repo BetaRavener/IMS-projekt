@@ -10,10 +10,12 @@
 #define EMPTY_TRAVEL_SPEED_BONUS (3.0 / 3.6) // in meter / second
 #define BASE_TRAVEL_SPEED (11.0 / 3.6) // in meter / second
 
-Ship::Ship(Place *origin, Place *destination, double capacity, double cargoSize, double length) :
+Ship::Ship(Place *origin, Place *destination, bool trace, double capacity, double cargoSize, double length) :
     currentPlace(origin),
     destination(destination),
     sailDirection(Direction::ToCrossroad),
+    trace(trace),
+    route(""),
     capacity(capacity),
     cargoSize(cargoSize),
     length(length)
@@ -35,6 +37,10 @@ void Ship::Behavior()
 {
     double travelDistance;
     double travelSpeed;
+
+    if (trace)
+        route += currentPlace->getName() + "\n";
+
     while (currentPlace != destination)
     {
         // Travel to next place
@@ -42,8 +48,17 @@ void Ship::Behavior()
         currentPlace = currentPlace->getNext(sailDirection, &travelDistance);
         Wait(travelDistance / travelSpeed);
 
+        if (trace)
+            route += currentPlace->getName() + "\n";
+
         // Make action there
         currentPlace->SailProcedure(*this);
+    }
+
+    if (trace)
+    {
+        route += "\n";
+        Print(route.c_str());
     }
 }
 

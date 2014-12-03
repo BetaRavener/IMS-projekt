@@ -12,6 +12,8 @@
 #include "ship_lock.h"
 #include "tunnel_group.h"
 #include "tunnel.h"
+#include "river_end.h"
+#include "bridge.h"
 #include "ship.h"
 #include "crossroad.h"
 
@@ -25,12 +27,15 @@ public:
     void Output();
 
 private:
-    Port* a;
-    Port* b;
-    ShipLock* lock;
-    Tunnel* tunnel;
+    Place *a, *b;
 
-    Crossroad crossroad;
+    Crossroad* crossroad;
+
+    Place* currentPathwayPlace;
+    double currentRiverKm;
+
+    Place* startPathway(Place* origin, double distanceFromCrossroad, double length = 0);
+    Place* addPlaceToPathway(Place* place, double riverKm, double length = 0);
 };
 
 #endif /* MODEL_H_ */

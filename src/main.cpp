@@ -9,7 +9,7 @@ Model model;
 class Generator : public Event {
   void Behavior() {
     model.addShip();
-    Activate(Time+Exponential(1000));
+    Activate(Time+10000000);
   }
 };
 
@@ -23,7 +23,7 @@ int main()
     // Initialize simlib model and related components
     // Set time in which to begin and end simulation
     RandomSeed(seed);
-    Init(0, 1000000);
+    Init(0, 100000000);
     (new Generator)->Activate();
 
     // Run simulation
