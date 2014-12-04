@@ -17,6 +17,7 @@
 #include "ship.h"
 #include "crossroad.h"
 
+
 class Model
 {
 public:
@@ -25,9 +26,10 @@ public:
     void addShip();
 
     void Output();
+    Place *dunaj, *labe, *odra, *brno, *pardubice, *breclav, *hodonin, *prerov, *bohumin;
+
 
 private:
-    Place *a, *b;
 
     Crossroad* crossroad;
 
