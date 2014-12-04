@@ -2,85 +2,22 @@
 #include <simlib.h>
 #include <time.h>
 #include <string.h>
+#include <vector>
+#include "generator.h"
+#include "globals.h"
 
 #include "model.h"
-
-#define DAY 86400
-#define YEAR 31557600
-#define SHIP_CAPACITY 4000
 
 using namespace std;
 
 Model model;
 int yearNum = 0;
 
-Histogram Tabulka("Tabulka",0,YEAR,4);
-Histogram Tabulka2("Tabulka",0,1,7);
-class GeneratorFromEnds : public Event {
-    // will be incresed by years
-    private:
-        long avgTons;
-        long tonsLeft;
-    // time for exponential distribution for ships per year in seconds
-        double nextShipTime;
-        bool import;
-        Place*  src;
-        Place*  dest;
-        long actualYear;
+Histogram internationalHist("international",0,YEAR,4);
+Histogram importHist("import",0,YEAR,4);
+Histogram exportHist("export",0,YEAR,4);
+Histogram nationalHist("national",0,YEAR,4);
 
-    public: GeneratorFromEnds(long avgTons, Place*  src = NULL, Place* dest = NULL, bool import = false){
-        this->avgTons = this->tonsLeft = avgTons;
-        this->nextShipTime = YEAR /  (avgTons / SHIP_CAPACITY);
-        this->import = import;
-        // dest will be used only in international mode. International is preset and not parameterized
-        this->src = src;
-        this->dest = dest;
-        this->actualYear = 0;
-    }
-
-    public: void Behavior() {
-        Place* destination = dest;
-        if (import)
-            switch (Uniform(0,5))
-            {
-                case 0:
-                    destination =model.bohumin;
-                    break;
-                case 1:
-                    destination=model.brno;
-                    break;
-                case 2:
-                    destination=model.pardubice;
-                    break;
-                case 3:
-                    destination=model.breclav;
-                    break;
-                case 4:
-                    destination=model.hodonin;
-                    break;
-                case 5:
-                    destination=model.prerov;
-                    break;
-            }
-        // get year in actual time
-        long year = (int)Time / YEAR;
-        // increase tons by 5% by each year
-        while (actualYear < year)
-        {
-            this->avgTons *= 1.05;
-            this->tonsLeft += avgTons;
-            this-> nextShipTime = YEAR /  (this->tonsLeft / SHIP_CAPACITY);
-            actualYear++;
-
-        }
-        long tons = (tonsLeft > SHIP_CAPACITY)? SHIP_CAPACITY:tonsLeft;
-        tonsLeft -= tons;
-        //(new Ship(src, destination, false, tons))->Activate();
-        Tabulka(Time);
-        Activate(Time+Exponential(nextShipTime));
-    }
-
-};
 
 int main()
 {
@@ -93,19 +30,59 @@ int main()
     // Set time in which to begin and end simulation
     RandomSeed(seed);
     Init(0, YEAR*4);
-    (new GeneratorFromEnds(6298000,model.labe,model.dunaj, false))->Activate();
-    (new GeneratorFromEnds(4925000,model.dunaj,model.labe, false))->Activate();
-    (new GeneratorFromEnds(8919000,model.odra,model.dunaj, false))->Activate();
-    (new GeneratorFromEnds(5833000,model.dunaj,model.odra, false))->Activate();
+    (new Generator(6298000, new vector <Place*> {model.labe}, new vector <Place*> {model.dunaj}, &internationalHist))->Activate();
+    (new Generator(4925000, new vector <Place*> {model.dunaj}, new vector <Place*> {model.labe}, &internationalHist))->Activate();
+    (new Generator(8919000, new vector <Place*> {model.odra}, new vector <Place*> {model.dunaj}, &internationalHist))->Activate();
+    (new Generator(5833000, new vector <Place*> {model.dunaj}, new vector <Place*> {model.odra}, &internationalHist))->Activate();
 
-    //import to specific port
-    (new GeneratorFromEnds(5833000,model.dunaj, NULL, true))->Activate();
-    //(new GeneratorFromEnds(5833000,model.odra, NULL, false))->Activate();
-    //(new GeneratorFromEnds(5833000,model.labe, NULL, false))->Activate();
+    // import to all czech ports
+    (new Generator(265000, new vector <Place*> {model.labe}, new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov}, &importHist))->Activate();
+    // there is elbe, due to ports in czech that are not included in our model, therefore destination is elbe as exit point
+    (new Generator(2161000, new vector <Place*> {model.dunaj}, new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov, model.labe}, &importHist))->Activate();
+    (new Generator(903000, new vector <Place*> {model.odra}, new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov, model.labe}, &importHist))->Activate();
+
+    // export from czech republic
+    // goods that all ports may export
+    (new Generator(1530000, new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov, model.labe}, new vector <Place*> {model.dunaj}, &exportHist))->Activate();
+    (new Generator(692500, new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov, model.labe}, new vector <Place*> {model.odra}, &exportHist))->Activate();
+    (new Generator(316500, new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov}, new vector <Place*> {model.labe}, &exportHist))->Activate();
+
+
+    // bohnice export (ores, fuels, metals, see doc)
+    // danube
+    (new Generator(3173000, new vector <Place*> {model.bohumin}, new vector <Place*> {model.dunaj}, &exportHist))->Activate();
+    // elbe
+    (new Generator(35000, new vector <Place*> {model.bohumin}, new vector <Place*> {model.labe}, &exportHist))->Activate();
+    // oder
+    (new Generator(135000, new vector <Place*> {model.bohumin}, new vector <Place*> {model.odra}, &exportHist))->Activate();
+
+
+    // labe(ports from czech but beyond our map), pardubice export (oil, chemistry products, oil products...mainly chemistry industry, see doc)
+    // danube
+    (new Generator(426000, new vector <Place*> {model.labe, model.pardubice}, new vector <Place*> {model.dunaj}, &exportHist))->Activate();
+    // oder
+    (new Generator(53000, new vector <Place*> {model.labe, model.pardubice}, new vector <Place*> {model.odra}, &exportHist))->Activate();
+    // labe, now considering only pardubice
+    (new Generator(12000, new vector <Place*> {model.pardubice}, new vector <Place*> {model.labe}, &exportHist))->Activate();
+
+
+    // national transport
+    (new Generator(2150000,
+            new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov, model.labe},
+            new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov, model.prerov},
+            &nationalHist))->Activate();
+
+
+
+
+*/
     // Run simulation
     Run();
 
-    Tabulka.Output();
+    internationalHist.Output();
+    importHist.Output();
+    exportHist.Output();
+    nationalHist.Output();
 
     // Display results and perform cleanup if necessary
     return 0;
