@@ -53,7 +53,7 @@ void Bridge::SailProcedure(Ship &ship)
         ship.Seize(*bridge);
 
         // Start sailing through tunnel
-        ship.Wait(length / MAX_BRIDGE_SPEED);
+        ship.Sail(length, MAX_BRIDGE_SPEED);
 
         // Signal that tunnel is free if this was last ship in group
         // The queue in opposite direction has priority

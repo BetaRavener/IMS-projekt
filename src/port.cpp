@@ -19,9 +19,10 @@ void Port::SailProcedure(Ship &s)
     // Otherwise the ship is just passing the port
     if (s.getDestination() == this)
     {
-        s.Enter(quay, 1);
-        s.Wait((double)s.getCargoSize() / transferSpeed);
-        s.Leave(quay, 1);
+        //TODO: needed?
+//        s.Enter(quay, 1);
+//        s.Wait((double)s.getCargoSize() / transferSpeed);
+//        s.Leave(quay, 1);
     }
 }
 

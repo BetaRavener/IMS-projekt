@@ -7,6 +7,7 @@
 #include "globals.h"
 
 #include "model.h"
+#include "experiment.h"
 
 using namespace std;
 
@@ -29,23 +30,23 @@ int main()
     // Initialize simlib model and related components
     // Set time in which to begin and end simulation
     RandomSeed(seed);
-    Init(0, YEAR*4);
+    Init(0, YEAR*20);
     (new Generator(6298000, new vector <Place*> {model.labe}, new vector <Place*> {model.dunaj}, &internationalHist))->Activate();
     (new Generator(4925000, new vector <Place*> {model.dunaj}, new vector <Place*> {model.labe}, &internationalHist))->Activate();
     (new Generator(8919000, new vector <Place*> {model.odra}, new vector <Place*> {model.dunaj}, &internationalHist))->Activate();
     (new Generator(5833000, new vector <Place*> {model.dunaj}, new vector <Place*> {model.odra}, &internationalHist))->Activate();
 
     // import to all czech ports
-    (new Generator(265000, new vector <Place*> {model.labe}, new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov}, &importHist))->Activate();
+    (new Generator(265000, new vector <Place*> {model.labe}, new vector <Place*> {model.brodske, model.pardubice, model.bohumin, model.hodonin, model.prerov}, &importHist))->Activate();
     // there is elbe, due to ports in czech that are not included in our model, therefore destination is elbe as exit point
-    (new Generator(2161000, new vector <Place*> {model.dunaj}, new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov, model.labe}, &importHist))->Activate();
-    (new Generator(903000, new vector <Place*> {model.odra}, new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov, model.labe}, &importHist))->Activate();
+    (new Generator(2161000, new vector <Place*> {model.dunaj}, new vector <Place*> {model.brodske, model.pardubice, model.bohumin, model.hodonin, model.prerov, model.labe}, &importHist))->Activate();
+    (new Generator(903000, new vector <Place*> {model.odra}, new vector <Place*> {model.brodske, model.pardubice, model.bohumin, model.hodonin, model.prerov, model.labe}, &importHist))->Activate();
 
     // export from czech republic
     // goods that all ports may export
-    (new Generator(1530000, new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov, model.labe}, new vector <Place*> {model.dunaj}, &exportHist))->Activate();
-    (new Generator(692500, new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov, model.labe}, new vector <Place*> {model.odra}, &exportHist))->Activate();
-    (new Generator(316500, new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov}, new vector <Place*> {model.labe}, &exportHist))->Activate();
+    (new Generator(1530000, new vector <Place*> {model.brodske, model.pardubice, model.bohumin, model.hodonin, model.prerov, model.labe}, new vector <Place*> {model.dunaj}, &exportHist))->Activate();
+    (new Generator(692500, new vector <Place*> {model.brodske, model.pardubice, model.bohumin, model.hodonin, model.prerov, model.labe}, new vector <Place*> {model.odra}, &exportHist))->Activate();
+    (new Generator(316500, new vector <Place*> {model.brodske, model.pardubice, model.bohumin, model.hodonin, model.prerov}, new vector <Place*> {model.labe}, &exportHist))->Activate();
 
 
     // bohnice export (ores, fuels, metals, see doc)
@@ -68,14 +69,10 @@ int main()
 
     // national transport
     (new Generator(2150000,
-            new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov, model.labe},
-            new vector <Place*> {model.breclav, model.pardubice, model.bohumin, model.brno, model.hodonin, model.prerov, model.prerov},
+            new vector <Place*> {model.brodske, model.pardubice, model.bohumin, model.hodonin, model.prerov, model.labe},
+            new vector <Place*> {model.brodske, model.pardubice, model.bohumin, model.hodonin, model.prerov, model.prerov},
             &nationalHist))->Activate();
 
-
-
-
-*/
     // Run simulation
     Run();
 
@@ -83,6 +80,7 @@ int main()
     importHist.Output();
     exportHist.Output();
     nationalHist.Output();
+    Experiment::instance()->Output();
 
     // Display results and perform cleanup if necessary
     return 0;

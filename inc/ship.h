@@ -15,6 +15,8 @@ class Ship : public Process {
 public:
     Ship(Place *origin, Place *destination, bool trace = false, double capacity = 4000, double cargoSize = 4000, double length = 180);
 
+    void Sail(double sectionLength, double speed);
+
     Direction getSailDirection();
     void setSailDirection(Direction direction);
 
@@ -29,6 +31,7 @@ private:
 
     bool trace;
     std::string route;
+    double routeLength;
 
     double capacity; // in tons
     double cargoSize; // in tons

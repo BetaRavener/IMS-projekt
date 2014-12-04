@@ -18,13 +18,16 @@ Model::Model()
 
     // Dunaj pathway
     startPathway(new ShipLock("Rokytnice", 24, Direction::ToCrossroad), 0.7);
+    prerov = addPlaceToPathway(new Port("Prerov"), 2.1);
     addPlaceToPathway(new ShipLock("Zarici", 10.5, Direction::ToCrossroad), 11.5);
     addPlaceToPathway(new ShipLock("Kromeriz", 4.8, Direction::ToCrossroad), 22.2);
     addPlaceToPathway(new ShipLock("Belov", 4.5, Direction::ToCrossroad), 37.4);
     addPlaceToPathway(new ShipLock("Uh. Hradiste", 6.6, Direction::ToCrossroad), 54.2);
     addPlaceToPathway(new ShipLock("Rohatec", 11.4, Direction::ToCrossroad), 83);
     addPlaceToPathway(new ShipLock("Hodonin", 4.7, Direction::ToCrossroad), 91.9);
+    hodonin = addPlaceToPathway(new Port("Hodonin"), 93.8);
     addPlaceToPathway(new ShipLock("Tvrdonice", 4.7, Direction::ToCrossroad), 109.3);
+    brodske = addPlaceToPathway(new Port("Brodske"), 118.2);
     addPlaceToPathway(new Bridge("Morava", 800, Bridge::Type::TwoWay), 156.19, 800);
     addPlaceToPathway(new ShipLock("Lobau", 1.8, Direction::ToCrossroad), 188.5);
     dunaj = addPlaceToPathway(new RiverEnd("Dunaj"), 190.49);
@@ -40,6 +43,7 @@ Model::Model()
     addPlaceToPathway(new ShipLock("Vyskovice", 10.5, Direction::ToCrossroad), 83.3);
     addPlaceToPathway(new ShipLock("Svinov", 5.3, Direction::ToCrossroad), 88.6);
     addPlaceToPathway(new ShipLock("Privoz", 7.2, Direction::ToCrossroad), 94.4);
+    bohumin = addPlaceToPathway(new Port("Bohumin"), 100.9);
     addPlaceToPathway(new ShipLock("Bohumin", 12.9, Direction::ToCrossroad), 109);
     odra = addPlaceToPathway(new RiverEnd("Odra"), 109.19);
 
@@ -64,17 +68,8 @@ Model::Model()
     addPlaceToPathway(new Tunnel("Vraclav", 240, 1), 128.93, 240);
     addPlaceToPathway(new ShipLock("Turov", 27.5, Direction::ToCrossroad), 139.3);
     addPlaceToPathway(new ShipLock("Cerna za B.", 27.5, Direction::ToCrossroad), 149.5);
-    labe = addPlaceToPathway(new RiverEnd("Labe"), 154.4);
-}
-
-void Model::addShip()
-{
-    //(new Ship(a, b, true))->Activate();
-}
-
-void Model::Output()
-{
-
+    pardubice = addPlaceToPathway(new Port("Pardubice"), 159.7);
+    labe = addPlaceToPathway(new RiverEnd("Labe"), 164.4);
 }
 
 Place* Model::startPathway(Place* origin, double distanceFromCrossroad, double length)

@@ -15,7 +15,7 @@
 class Port : public Place
 {
 public:
-    Port(const char* name, int quayCapacity, double transferSpeed = 0.05);
+    Port(const char* name, int quayCapacity = 50, double transferSpeed = 0.05);
 
     virtual void SailProcedure(Ship &s);
 

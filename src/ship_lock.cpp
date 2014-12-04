@@ -35,6 +35,7 @@ ShipLock::ShipLock(const char* name, double height, Direction riseDirection, int
 
 void ShipLock::SailProcedure(Ship &s)
 {
+    return;
     Direction direction = s.getSailDirection();
 
     int idx = chooseChamber(direction);

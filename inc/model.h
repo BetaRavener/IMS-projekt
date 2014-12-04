@@ -23,12 +23,7 @@ class Model
 public:
     Model();
 
-    void addShip();
-
-    void Output();
-    Place *dunaj, *labe, *odra, *brno, *pardubice, *breclav, *hodonin, *prerov, *bohumin;
-
-
+    Place *dunaj, *labe, *odra, *pardubice, *brodske, *hodonin, *prerov, *bohumin;
 private:
 
     Crossroad* crossroad;

@@ -5,18 +5,16 @@
  *      Author: ivan_hoe
  */
 
-
-
 #include "generator.h"
+#include "ship.h"
 
-
-Generator::Generator(long    avgTons, std::vector <Place*>  *src, std::vector <Place*> *dest, Histogram *hist):
-    srcV(src),
+Generator::Generator(long avgTons, std::vector <Place*>  *src, std::vector <Place*> *dest, Histogram *hist):
     avgTons(avgTons),
     tonsLeft(avgTons),
     nextShipTime(YEAR /  (avgTons / SHIP_CAPACITY)),
-    actualYear(0),
+    srcV(src),
     destV(dest),
+    actualYear(0),
     hist(hist)
     {}
 
@@ -47,7 +45,7 @@ void Generator::Behavior(){
     }
     long tons = (tonsLeft > SHIP_CAPACITY)? SHIP_CAPACITY:tonsLeft;
     tonsLeft -= tons;
-    //(new Ship(src, destination, false, tons))->Activate();
+    (new Ship(src, dest, false, tons))->Activate();
     if (hist)
        (*hist)(Time);
     Activate(Time+Exponential(nextShipTime));

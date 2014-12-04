@@ -50,7 +50,7 @@ void Tunnel::SailProcedure(Ship &ship)
     }
 
     // Start sailing through tunnel
-    ship.Wait(length / MAX_TUNNEL_SPEED);
+    ship.Sail(length, MAX_TUNNEL_SPEED);
 
     group->leaveGroup();
 
