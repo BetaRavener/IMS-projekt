@@ -18,20 +18,24 @@ Tazko modelovatelne:
   predpokladane vyuzitie vodnej cesty.
   
 Experimenty:
-- Ci jeden zbudovany usek dokaze financovat stavbu dalsieho - zjednodusenie moze
-  byt experiment: vynosi konkretneho useku.
-- Kolko lodi treba do systemu generovat, aby bol rentabilny - ake je minimalne
-  vyuzitie vodnej trasy aby malo zmysel ju budovat.
+- Priemerna dlzka plavebnej trasy
+- Priemerna doba plavby
+- Vynosi prieplavu cez celkovy pocet preplavenych kilometrov nasobeny "myto na km"
+
+Ivan Sevcik:
+- Kedy dojde k prekroceniu maximalnej kapacity pri uvazovani s rocnym narastom
+  prepravy a ktore miesta budu prepravu najviac brzdit. 
 - Maximalna efektivna prepravna kapacita - kolko lodi je mozne do systemu generovat
   aby nevznikali prilis velke fronty / lod necakala na obsluhu prilis dlho.
-- Za kolko sa navratia investicie pri pribliznej realnej prepave. Moznost uvazovat
-  postupne dokoncovanie - model bude presnejsi a dojde k skorsej navratnosti.
-  Postupne dokoncovanie je narocne na modelovanie!
 - Ako ziskove je dielo pri maximalnej kapacite.
-- Kedy dojde k prekroceniu maximalnej kapacity pri uvazovani s rocnym narastom
-  prepravy a ktore miesta budu prepravu najviac brzdit.
 
-  
+Ivan Straka:
+- Kolko lodi treba do systemu generovat, aby bol rentabilny - ake je minimalne
+  vyuzitie vodnej trasy aby malo zmysel ju budovat.
+- Za kolko sa navratia investicie pri pribliznej realnej prepave.
+
+
+
 Model prepravy:
 - Zvysena produkcia lodi do systemu v miestach pripojenia na ine vyznamne toky
 - Pri vytvoreni lode do systemu sa musi urcit destinacia:
@@ -62,3 +66,15 @@ Potrebne parametre (bude priebezne doplnene):
 - Zdrzanie na jednotlivych typov stavieb
 - Plavebna rychlost
 - Kapacita pristavov, doba vykladky,...
+
+UVAZOVAT VAHU LODE
+
+UVAZOVAT VAHU LODE
+
+UVAZOVAT VAHU LODE
+
+UVAZOVAT VAHU LODE
+
+UVAZOVAT VAHU LODE
+
+UVAZOVAT VAHU LODE
