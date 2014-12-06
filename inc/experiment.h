@@ -9,6 +9,7 @@
 #define EXPERIMENT_H_
 
 #include <simlib.h>
+#include "globals.h"
 
 class Experiment
 {
@@ -32,6 +33,15 @@ private:
     Stat routeLength;
     Stat routeTime;
     Stat toll;
+
+    // Approximate investments
+    double investments;
+    double yearQuarterCosts;
+    // income
+    double income;
+
+    // time whe investments are payed back
+    double payedBackTime;
 };
 
 #endif /* EXPERIMENT_H_ */

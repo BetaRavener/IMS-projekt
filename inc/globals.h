@@ -4,6 +4,11 @@
 
 #define DAY 86400
 #define YEAR 31557600
+#define YEAR_QUARTER 7889400
 #define SHIP_CAPACITY 4000
+
+
+#define YEARS_SIMULATION 120
+#define YEAR_DIVISOR_HIST 1
 
 #endif

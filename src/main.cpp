@@ -11,10 +11,6 @@
 
 using namespace std;
 
-#define YEARS_SIMULATION 20
-#define YEAR_DIVISOR_HIST 1
-
-
 Model model;
 int yearNum = 0;
 
@@ -35,7 +31,7 @@ int main()
     // Initialize simlib model and related components
     // Set time in which to begin and end simulation
     RandomSeed(seed);
-    Init(0, YEAR*YEARS_SIMULATION);
+    Init(0, (double)YEAR*YEARS_SIMULATION);
     (new Generator(6298000, new vector <Place*> {model.labe}, new vector <Place*> {model.dunaj}, &internationalHist))->Activate();
     (new Generator(4925000, new vector <Place*> {model.dunaj}, new vector <Place*> {model.labe}, &internationalHist))->Activate();
     (new Generator(8919000, new vector <Place*> {model.odra}, new vector <Place*> {model.dunaj}, &internationalHist))->Activate();
