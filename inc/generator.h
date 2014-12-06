@@ -18,18 +18,18 @@
 
 class Generator: public Event {
 private:
-    long avgTons;
-    long tonsLeft;
+    double avgTons;
+    double tonsLeft;
     // time for exponential distribution for ships per year in seconds
     double nextShipTime;
     std::vector <Place*>  *srcV;
     std::vector <Place*>  *destV;
-    double actualYear;
+    int actualYear;
     Histogram *hist;
     Place* getUniformPlace(std::vector <Place*> *list, Place *except = nullptr);
 
 public:
-    Generator(long avgTons, std::vector <Place*>  *src, std::vector <Place*> *dest, Histogram *hist = nullptr);
+    Generator(double avgTons, std::vector <Place*>  *src, std::vector <Place*> *dest, Histogram *hist = nullptr);
     virtual ~Generator();
     void Behavior();
 };

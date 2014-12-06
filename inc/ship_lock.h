@@ -18,7 +18,7 @@
 class ShipLock : public Place
 {
 public:
-    ShipLock(const char* name, double height, Direction riseDirection, int chamberCount = 1);
+    ShipLock(const char* name, double height, Direction riseDirection, int chamberCount = 2);
 
     virtual void SailProcedure(Ship &s);
 

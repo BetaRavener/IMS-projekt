@@ -35,7 +35,6 @@ ShipLock::ShipLock(const char* name, double height, Direction riseDirection, int
 
 void ShipLock::SailProcedure(Ship &s)
 {
-    return;
     Direction direction = s.getSailDirection();
 
     int idx = chooseChamber(direction);
@@ -80,7 +79,10 @@ void ShipLock::SailProcedure(Ship &s)
         }
         // Ship was activated by ship going in opposite direction.
         else
+        {
+            myQueue->GetFirst();
             s.Seize(*shipLock[idx]);
+        }
     }
     // Otherwise the lock is ready to use.
     else
@@ -94,7 +96,7 @@ void ShipLock::SailProcedure(Ship &s)
     toggleChamberLevel(idx);
 
     if (!oppositeQueue->Empty())
-        oppositeQueue->GetFirst()->Activate();
+        oppositeQueue->front()->Activate();
     else if (!myQueue->Empty())
         myQueue->front()->Activate(Time + timeout);
 

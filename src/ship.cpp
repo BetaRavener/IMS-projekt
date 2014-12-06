@@ -6,6 +6,7 @@
  */
 
 #include "ship.h"
+#include "globals.h"
 #include "experiment.h"
 
 #define EMPTY_TRAVEL_SPEED_BONUS (3.0 / 3.6) // in meter / second
@@ -41,10 +42,10 @@ void Ship::Sail(double sectionLength, double speed)
     Wait(sectionLength / speed);
 
     // Add to route length
-    routeLength += sectionLength / 1000;
+    routeLength += sectionLength;
 
     // Log toll into experiment
-    Experiment::instance()->addToll(sectionLength / 1000, cargoSize);
+    Experiment::instance()->addToll(sectionLength, cargoSize);
 }
 
 Direction Ship::getSailDirection()
@@ -86,7 +87,6 @@ void Ship::Behavior()
         // Travel to next place
         travelSpeed = BASE_TRAVEL_SPEED + (cargoSize / capacity) * EMPTY_TRAVEL_SPEED_BONUS;
         currentPlace = currentPlace->getNext(sailDirection, &travelDistance);
-        travelDistance *= 1000;
 
         Sail(travelDistance, travelSpeed);
 
@@ -96,7 +96,12 @@ void Ship::Behavior()
         }
 
         // Make action there
+        double procedureBeginT = Time;
         currentPlace->SailProcedure(*this);
+
+        // If sailing procedure took more than one day, the system reached it's capacity and the place is bottleneck
+        if (Time - procedureBeginT > (6*HOUR))
+            Experiment::instance()->informAboutBottleneck(currentPlace);
     }
     double endT = Time;
 

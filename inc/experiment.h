@@ -9,8 +9,22 @@
 #define EXPERIMENT_H_
 
 #include <simlib.h>
-#include <math.h>
+#include <vector>
 #include "globals.h"
+#include "place.h"
+
+class ExperimentBottleneck
+{
+public:
+    ExperimentBottleneck(Place* place);
+
+    double getTime();
+    Place* getPlace();
+
+private:
+    double firstTime;
+    Place* place;
+};
 
 class Experiment
 {
@@ -19,6 +33,7 @@ public:
 
     void addRoute(double length, double time);
     void addToll(double sectionLength, double cargoSize, double tollRate = 0.01);
+    void informAboutBottleneck(Place* place);
 
     void Output();
 private:
@@ -42,7 +57,11 @@ private:
     double income;
 
     // time whe investments are payed back
+    bool payedBack;
     double payedBackTime;
+
+    // route bottlenecks
+    std::vector<ExperimentBottleneck> bottlenecks;
 };
 
 #endif /* EXPERIMENT_H_ */

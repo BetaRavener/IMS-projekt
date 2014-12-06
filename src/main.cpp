@@ -3,6 +3,7 @@
 #include <time.h>
 #include <string.h>
 #include <vector>
+#include <chrono>
 #include "generator.h"
 #include "globals.h"
 
@@ -14,22 +15,24 @@ using namespace std;
 Model model;
 int yearNum = 0;
 
-
-Histogram internationalHist("international", 0, YEAR / YEAR_DIVISOR_HIST, YEARS_SIMULATION * YEAR_DIVISOR_HIST);
-Histogram importHist("import",0, YEAR / YEAR_DIVISOR_HIST, YEARS_SIMULATION * YEAR_DIVISOR_HIST);
-Histogram exportHist("export",0, YEAR / YEAR_DIVISOR_HIST, YEARS_SIMULATION * YEAR_DIVISOR_HIST);
-Histogram nationalHist("national", 0, YEAR / YEAR_DIVISOR_HIST, YEARS_SIMULATION * YEAR_DIVISOR_HIST);
+Histogram internationalHist("international", 0, YEAR / YEAR_HIST_SCALE, YEARS_SIMULATION);
+Histogram importHist("import",0, YEAR / YEAR_HIST_SCALE, YEARS_SIMULATION);
+Histogram exportHist("export",0, YEAR / YEAR_HIST_SCALE, YEARS_SIMULATION);
+Histogram nationalHist("national", 0, YEAR / YEAR_HIST_SCALE, YEARS_SIMULATION);
 
 
 int main()
 {
     // Initialize components not related to model
     // ...
-    //TODO: use more precise time with c++11
-    time_t seed = time(NULL);
+
 
     // Initialize simlib model and related components
     // Set time in which to begin and end simulation
+
+    // Use more precise time with c++11
+    //time_t seed = time(NULL);
+    unsigned long seed = std::chrono::system_clock::now().time_since_epoch().count();
     RandomSeed(seed);
     Init(0, YEAR*YEARS_SIMULATION);
     (new Generator(6298000, new vector <Place*> {model.labe}, new vector <Place*> {model.dunaj}, &internationalHist))->Activate();

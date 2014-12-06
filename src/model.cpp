@@ -74,16 +74,16 @@ Model::Model()
 
 Place* Model::startPathway(Place* origin, double distanceFromCrossroad, double length)
 {
-    crossroad->connect(origin, distanceFromCrossroad);
+    crossroad->connect(origin, distanceFromCrossroad * 1000.0);
     currentPathwayPlace = origin;
-    currentRiverKm = distanceFromCrossroad + length / 1000;
+    currentRiverKm = distanceFromCrossroad + length / 1000.0;
     return currentPathwayPlace;
 }
 
 Place* Model::addPlaceToPathway(Place* place, double riverKm, double length)
 {
-    currentPathwayPlace->connect(place, max(riverKm - currentRiverKm, 0));
+    currentPathwayPlace->connect(place, max(riverKm - currentRiverKm, 0) * 1000.0);
     currentPathwayPlace = place;
-    currentRiverKm = riverKm + length / 1000;
+    currentRiverKm = riverKm + length / 1000.0;
     return currentPathwayPlace;
 }
