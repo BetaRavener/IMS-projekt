@@ -11,7 +11,7 @@
 Generator::Generator(double avgTons, std::vector <Place*>  *src, std::vector <Place*> *dest, Histogram *hist):
     avgTons(avgTons),
     tonsLeft(avgTons),
-    nextShipTime(YEAR /  (avgTons / SHIP_CAPACITY)),
+    nextShipTime((YEAR - DAY*10) /  (avgTons / SHIP_CAPACITY)),
     srcV(src),
     destV(dest),
     actualYear(0),
@@ -33,21 +33,23 @@ void Generator::Behavior(){
 
     // get year in actual time
     int year = (int)(Time / YEAR);
-
-    while (actualYear < year)
+    int day = (((int) (Time / DAY))*100 % 36525) / 100;
+    if (!(0 <= day && day < 10))
     {
-        // increase tons by 2% by every year
-        this->avgTons *= 1.02;
-        this->tonsLeft = avgTons;
-        this-> nextShipTime = YEAR /  (this->tonsLeft / SHIP_CAPACITY);
-        actualYear++;
+		while (actualYear < year)
+		{
+			// increase tons by 2% by every year
+			this->avgTons *= 1.02;
+			this-> nextShipTime = (YEAR - DAY*10) /  (this->avgTons / SHIP_CAPACITY);
+			actualYear++;
+		}
+		(new Ship(src, dest, false, 4000))->Activate();
+		if (hist)
+		   (*hist)(Time / YEAR_HIST_SCALE);
     }
-    double tons = (tonsLeft > SHIP_CAPACITY)? SHIP_CAPACITY:tonsLeft;
-    tonsLeft -= tons;
-    (new Ship(src, dest, false, tons))->Activate();
-    if (hist)
-       (*hist)(Time / YEAR_HIST_SCALE);
-    Activate(Time+Exponential(nextShipTime));
+    //else
+    //	Print("%f %d\n",Time, day);
+	Activate(Time+Exponential(nextShipTime));
 }
 
 Place* Generator::getUniformPlace(std::vector <Place*> *list, Place *except){

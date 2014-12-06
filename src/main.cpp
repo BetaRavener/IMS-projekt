@@ -80,10 +80,14 @@ int main()
     // Run simulation
     Run();
 
+/*  uncomment next lines to see how many ships are generated
+ *
     internationalHist.Output();
     importHist.Output();
     exportHist.Output();
     nationalHist.Output();
+*/
+    Experiment::instance()->minShipsCalculate();
     Experiment::instance()->Output();
 
     // Display results and perform cleanup if necessary

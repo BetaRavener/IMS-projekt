@@ -10,7 +10,6 @@
 
 #include <simlib.h>
 #include <vector>
-#include <math.h>
 #include "globals.h"
 #include "place.h"
 

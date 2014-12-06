@@ -100,17 +100,27 @@ void Experiment::Output()
     else
         Print("Project hasn't been reached it's maximum capacity in %d years\n", YEARS_SIMULATION);
 
+    Print("Minimum tons to be transported with average toll to make project reasonable %d\n",minShips);
+
+
+}
+
+void Experiment::minShipsCalculate()
+{
+	minShips = (long) ceill(yearCosts / toll.MeanValue() * 4000);
 }
 
 Experiment::Experiment() :
     routeLength("Route length"),
     routeTime("Route time"),
     toll("Toll"),
-    investments(8155600000.0),
+    investments(8155600000.0 + 195600000.0),
     yearQuarterCosts(54800000.0 / 4.0),
+    yearCosts(54800000.0),
     income(0.0),
     payedBack(false),
-    payedBackTime(0.0)
+    payedBackTime(0.0),
+    minShips(0)
 {}
 
 Experiment::Experiment(Experiment const&)

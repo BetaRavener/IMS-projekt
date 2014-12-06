@@ -10,6 +10,7 @@
 
 #include <simlib.h>
 #include <vector>
+#include <math.h>
 #include "globals.h"
 #include "place.h"
 
@@ -34,6 +35,7 @@ public:
     void addRoute(double length, double time);
     void addToll(double sectionLength, double cargoSize, double tollRate = 0.01);
     void informAboutBottleneck(Place* place);
+    void minShipsCalculate();
 
     void Output();
 private:
@@ -53,12 +55,16 @@ private:
     // Approximate investments
     double investments;
     double yearQuarterCosts;
+    double yearCosts;
     // income
     double income;
 
     // time whe investments are payed back
     bool payedBack;
     double payedBackTime;
+
+    // minimum ships per year to be rentabile
+    long minShips;
 
     // route bottlenecks
     std::vector<ExperimentBottleneck> bottlenecks;
