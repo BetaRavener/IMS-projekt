@@ -31,14 +31,16 @@ void Experiment::addToll(double sectionLength, double cargoSize, double tollRate
     // project has been payed back
     if (payedBackTime != -1)
     	return;
+
+    double maintenanceCosts = trunc(Time / YEAR_QUARTER) * yearQuarterCosts;
     // add total income. If investments are payed back, Time will be written down.
     // investments are increased by maintenance costs. Those are added per year quarter.
-    if (income < investments + ((long) Time / (YEAR_QUARTER)) * yearQuarterCosts)
+    if (income < investments + maintenanceCosts)
     {
     	income += shipToll;
     }
     //
-    if (income >= investments + ((long) Time / (YEAR_QUARTER)) * yearQuarterCosts)
+    if (income >= investments + maintenanceCosts)
     {
     	payedBackTime = Time;
     }
@@ -54,7 +56,7 @@ void Experiment::Output()
     Print("Total: %f\n", toll.Sum());
     if (payedBackTime != -1)
     {
-    	Print("Project (%f) will be payed back in %d year and %d day\n",investments, (long) payedBackTime / (long) YEAR, ((long) payedBackTime % (int) YEAR) / DAY );
+    	Print("Project will be payed back in %.0f year, %d quarter\n", payedBackTime / YEAR, (((long) (payedBackTime / YEAR_QUARTER))%4) + 1);
     }
     else Print("Project hasn't been payed back (%d) years\n",YEARS_SIMULATION);
 }

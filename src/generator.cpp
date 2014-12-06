@@ -33,10 +33,10 @@ void Generator::Behavior(){
     Place* dest= getUniformPlace(destV, src);
 
     // get year in actual time
-    long timeYear = (long)Time / YEAR;
+    double year = trunc(Time / YEAR);
     // increase tons by 1% by every year
     // must be in cycle, due to possibility of generating next ship after more than one year (unlikely...but Murphy is bitch)
-    while (actualYear < timeYear)
+    while (actualYear < year)
     {
         this->avgTons *= 1.01;
         this->tonsLeft = avgTons;

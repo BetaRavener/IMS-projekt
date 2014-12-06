@@ -9,6 +9,7 @@
 #define EXPERIMENT_H_
 
 #include <simlib.h>
+#include <math.h>
 #include "globals.h"
 
 class Experiment

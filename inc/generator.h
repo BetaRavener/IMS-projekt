@@ -10,11 +10,10 @@
 
 #include <simlib.h>
 #include <vector>
+#include <math.h>
 #include "globals.h"
 #include "place.h"
 
-#include <iostream>
-#include <string.h>
 
 
 class Generator: public Event {
@@ -25,7 +24,7 @@ private:
     double nextShipTime;
     std::vector <Place*>  *srcV;
     std::vector <Place*>  *destV;
-    long actualYear;
+    double actualYear;
     Histogram *hist;
     Place* getUniformPlace(std::vector <Place*> *list, Place *except = nullptr);
 
