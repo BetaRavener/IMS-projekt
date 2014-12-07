@@ -8,7 +8,7 @@
 #define SHIP_CAPACITY 4000.0 // tons
 
 
-#define YEARS_SIMULATION 80
+#define YEARS_SIMULATION 60
 #define YEAR_HIST_SCALE DAY // specifies resolution (or scale) for histograms
 
 #endif

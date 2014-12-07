@@ -48,7 +48,7 @@ int main()
 
     // export from czech republic
     // goods that all ports may export
-    (new Generator(1530000, new vector <Place*> {model.brodske, model.pardubice, model.bohumin, model.hodonin, model.prerov, model.labe}, new vector <Place*> {model.dunaj}, &exportHist))->Activate();
+    (new Generator(1514000, new vector <Place*> {model.brodske, model.pardubice, model.bohumin, model.hodonin, model.prerov, model.labe}, new vector <Place*> {model.dunaj}, &exportHist))->Activate();
     (new Generator(692500, new vector <Place*> {model.brodske, model.pardubice, model.bohumin, model.hodonin, model.prerov, model.labe}, new vector <Place*> {model.odra}, &exportHist))->Activate();
     (new Generator(316500, new vector <Place*> {model.brodske, model.pardubice, model.bohumin, model.hodonin, model.prerov}, new vector <Place*> {model.labe}, &exportHist))->Activate();
 
@@ -64,7 +64,7 @@ int main()
 
     // labe(ports from czech but beyond our map), pardubice export (oil, chemistry products, oil products...mainly chemistry industry, see doc)
     // danube
-    (new Generator(426000, new vector <Place*> {model.labe, model.pardubice}, new vector <Place*> {model.dunaj}, &exportHist))->Activate();
+    (new Generator(442000, new vector <Place*> {model.labe, model.pardubice}, new vector <Place*> {model.dunaj}, &exportHist))->Activate();
     // oder
     (new Generator(53000, new vector <Place*> {model.labe, model.pardubice}, new vector <Place*> {model.odra}, &exportHist))->Activate();
     // labe, now considering only pardubice
