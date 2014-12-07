@@ -17,15 +17,9 @@ ShipLock::ShipLock(const char* name, double height, Direction riseDirection, int
 {
     for (int i = 0; i < chamberCount; i++)
     {
-        std::string nameStr(name);
-        nameStr += "-Chamber";
-        nameStr += std::to_string(i+1);
-        names.push_back(nameStr);
-        names.push_back(std::string(nameStr + "-A"));
-        names.push_back(std::string(nameStr + "-B"));
-        shipLock.push_back(new Facility(names[i*3+0].c_str()));
-        queueA.push_back(new Queue(names[i*3+1].c_str()));
-        queueB.push_back(new Queue(names[i*3+2].c_str()));
+        shipLock.push_back(new Facility);
+        queueA.push_back(new Queue);
+        queueB.push_back(new Queue);
         chamberLevel.push_back(ChamberLevel::Low);
     }
 
@@ -36,12 +30,13 @@ ShipLock::ShipLock(const char* name, double height, Direction riseDirection, int
 void ShipLock::SailProcedure(Ship &s)
 {
     Direction direction = s.getSailDirection();
+    log(direction);
 
     int idx = chooseChamber(direction);
     Queue* myQueue = direction == Direction::ToEndpoint ? queueA[idx] : queueB[idx];
     Queue* oppositeQueue = direction == Direction::ToEndpoint ? queueB[idx] : queueA[idx];
 
-    double timeout = 3600;
+    double timeout = 900.0;
 
     // If lock is already used or there is ship in my queue, queue up
     // If water level in chamber is wrong for this direction but lock is not used, queue up with timeout
@@ -105,11 +100,14 @@ void ShipLock::SailProcedure(Ship &s)
 
 void ShipLock::Output()
 {
+    Print ("Ship lock %s\n", name.c_str());
+    Print ("Ships in direction ToEndpoint %ld\nShips in direction ToCrossroad %ld\n", statA, statB);
     for (unsigned int i = 0; i < shipLock.size(); i++)
     {
-        shipLock[i]->Output();
-        queueA[i]->Output();
-        queueB[i]->Output();
+        Print("Statistics for chamber %d\n", i + 1);
+        Print("\tUsage: %f\n", shipLock[i]->tstat.MeanValue());
+        Print("\tDirection ToEndpoint queue - max %f, cur %d\n", queueA[i]->StatN.Max(), queueA[i]->size());
+        Print("\tDirection ToCrossway queue - max %f, cur %d\n", queueB[i]->StatN.Max(), queueB[i]->size());
     }
 }
 
@@ -188,4 +186,12 @@ int ShipLock::chooseChamber(Direction direction)
         }
     }
     return bestIdx;
+}
+
+void ShipLock::log(Direction incomingDirection)
+{
+    if (incomingDirection == Direction::ToEndpoint)
+        statA += 1;
+    else
+        statB += 1;
 }

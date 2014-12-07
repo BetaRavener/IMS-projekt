@@ -101,6 +101,7 @@ void Experiment::Output()
         for (unsigned int i = 0; i < count; i++)
         {
             Print("Bottleneck %d in place %s in year %d\n", i+1, bottlenecks[i].getPlace()->getName().c_str(), (int)(bottlenecks[i].getTime() / YEAR));
+            bottlenecks[i].getPlace()->Output();
         }
     }
     else

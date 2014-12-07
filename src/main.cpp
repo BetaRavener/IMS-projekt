@@ -29,11 +29,6 @@ int main()
 
     // Initialize simlib model and related components
     // Set time in which to begin and end simulation
-
-    // Use more precise time with c++11
-    //time_t seed = time(NULL);
-    unsigned long seed = std::chrono::system_clock::now().time_since_epoch().count();
-    RandomSeed(seed);
     Init(0, YEAR*YEARS_SIMULATION);
     (new Generator(6298000, new vector <Place*> {model.labe}, new vector <Place*> {model.dunaj}, &internationalHist))->Activate();
     (new Generator(4925000, new vector <Place*> {model.dunaj}, new vector <Place*> {model.labe}, &internationalHist))->Activate();

@@ -34,10 +34,10 @@ protected:
     Place* next;
     double nextDistance;
 
+    std::string name;
 private:
     Place* previous;
     double previousDistance;
-    std::string name;
 };
 
 

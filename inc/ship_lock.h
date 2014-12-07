@@ -18,7 +18,7 @@
 class ShipLock : public Place
 {
 public:
-    ShipLock(const char* name, double height, Direction riseDirection, int chamberCount = 2);
+    ShipLock(const char* name, double height, Direction riseDirection, int chamberCount = 1);
 
     virtual void SailProcedure(Ship &s);
 
@@ -31,11 +31,14 @@ private:
     std::vector<Queue*> queueB;
     std::vector<Facility*> shipLock;
     std::vector<ChamberLevel> chamberLevel;
-    std::vector<std::string> names;
+
+    unsigned long statA;
+    unsigned long statB;
 
     double chamberWaitTime;
     Direction riseDirection;
 
+    void log(Direction incomingDirection);
     void toggleChamberLevel(int idx);
     bool isLevelInDirection(Direction direction, int idx);
     int chooseChamber(Direction direction);
