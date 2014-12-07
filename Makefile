@@ -34,6 +34,9 @@ debug: build
 
 build: main
 
+run:
+	./bin/dol
+
 main: $(MAIN_OBJS)
 	$(CXX) $^ -o $(BIN_FOLDER)/$(BIN_MAIN) $(LFLAGS)
 
@@ -47,4 +50,4 @@ clean:
 pack:
 	$(ZIP) $(ZIP_FILE) $(PACKED_FILES)
 
-.PHONY: build release debug main clean pack
+.PHONY: build release debug main clean pack run
