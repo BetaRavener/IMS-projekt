@@ -107,6 +107,7 @@ void Ship::Behavior()
 
     // Log route into experiment
     Experiment::instance()->addRoute(routeLength, endT - beginT);
+    Experiment::instance()->addRouteToll(routeLength, cargoSize);
 
     if (trace)
     {

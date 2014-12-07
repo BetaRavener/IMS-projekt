@@ -36,6 +36,7 @@ public:
     void addToll(double sectionLength, double cargoSize, double tollRate = 0.01);
     void informAboutBottleneck(Place* place);
     void minShipsCalculate();
+    void addRouteToll(double routeLength, double cargoSize, double tollRate = 0.01);
 
     void Output();
 private:
@@ -51,6 +52,7 @@ private:
     Stat routeLength;
     Stat routeTime;
     Stat toll;
+    Stat shipsToll;
 
     // Approximate investments
     double investments;
@@ -59,7 +61,7 @@ private:
     // income
     double income;
 
-    // time whe investments are payed back
+    // time when investments are payed back
     bool payedBack;
     double payedBackTime;
 

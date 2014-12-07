@@ -15,10 +15,10 @@ using namespace std;
 Model model;
 int yearNum = 0;
 
-Histogram internationalHist("international", 0, YEAR / YEAR_HIST_SCALE, YEARS_SIMULATION);
+Histogram internationalHist("international transport", 0, YEAR / YEAR_HIST_SCALE, YEARS_SIMULATION);
 Histogram importHist("import",0, YEAR / YEAR_HIST_SCALE, YEARS_SIMULATION);
 Histogram exportHist("export",0, YEAR / YEAR_HIST_SCALE, YEARS_SIMULATION);
-Histogram nationalHist("national", 0, YEAR / YEAR_HIST_SCALE, YEARS_SIMULATION);
+Histogram nationalHist("national transport", 0, YEAR / YEAR_HIST_SCALE, YEARS_SIMULATION);
 
 
 int main()
@@ -80,13 +80,12 @@ int main()
     // Run simulation
     Run();
 
-/*  uncomment next lines to see how many ships are generated
- *
+
     internationalHist.Output();
     importHist.Output();
     exportHist.Output();
     nationalHist.Output();
-*/
+
     Experiment::instance()->minShipsCalculate();
     Experiment::instance()->Output();
 

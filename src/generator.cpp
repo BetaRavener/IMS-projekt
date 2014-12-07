@@ -11,7 +11,7 @@
 Generator::Generator(double avgTons, std::vector <Place*>  *src, std::vector <Place*> *dest, Histogram *hist):
     avgTons(avgTons),
     tonsLeft(avgTons),
-    nextShipTime((YEAR - DAY*10) /  (avgTons / SHIP_CAPACITY)),
+    nextShipTime((YEAR) /  (avgTons / SHIP_CAPACITY)),
     srcV(src),
     destV(dest),
     actualYear(0),
@@ -33,22 +33,16 @@ void Generator::Behavior(){
 
     // get year in actual time
     int year = (int)(Time / YEAR);
-    int day = (((int) (Time / DAY))*100 % 36525) / 100;
-    if (!(0 <= day && day < 10))
+    while (actualYear < year)
     {
-		while (actualYear < year)
-		{
-			// increase tons by 2% by every year
-			this->avgTons *= 1.02;
-			this-> nextShipTime = (YEAR - DAY*10) /  (this->avgTons / SHIP_CAPACITY);
-			actualYear++;
-		}
-		(new Ship(src, dest, false, 4000))->Activate();
-		if (hist)
-		   (*hist)(Time / YEAR_HIST_SCALE);
+        // increase tons by 2% by every year
+        this->avgTons *= 1.02;
+        this-> nextShipTime = (YEAR) /  (this->avgTons / SHIP_CAPACITY);
+        actualYear++;
     }
-    //else
-    //	Print("%f %d\n",Time, day);
+    (new Ship(src, dest, false, 4000))->Activate();
+    if (hist)
+       (*hist)(Time / YEAR_HIST_SCALE);
 	Activate(Time+Exponential(nextShipTime));
 }
 

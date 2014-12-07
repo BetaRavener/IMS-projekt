@@ -38,6 +38,12 @@ void Experiment::addRoute(double length, double time)
     routeTime(time / 3600.0); // converted to hours
 }
 
+// add toll statistics for whole route
+void Experiment::addRouteToll(double routeLength, double cargoSize, double tollRate)
+{
+    shipsToll(routeLength / 1000.0 * cargoSize * tollRate);
+}
+
 void Experiment::addToll(double sectionLength, double cargoSize, double tollRate)
 {
 	double shipToll = sectionLength / 1000.0 * cargoSize * tollRate;
@@ -100,20 +106,21 @@ void Experiment::Output()
     else
         Print("Project hasn't been reached it's maximum capacity in %d years\n", YEARS_SIMULATION);
 
-    Print("Minimum tons to be transported with average toll to make project reasonable %d\n",minShips);
+    Print("Minimum boats per year with average toll for whole route to make project reasonable %d\n",minShips);
 
 
 }
 
 void Experiment::minShipsCalculate()
 {
-	minShips = (long) ceill(yearCosts / toll.MeanValue() * 4000);
+	minShips = (long) ceill(yearCosts / shipsToll.MeanValue());
 }
 
 Experiment::Experiment() :
     routeLength("Route length"),
     routeTime("Route time"),
     toll("Toll"),
+    shipsToll("Overall ship toll"),
     investments(8155600000.0 + 195600000.0),
     yearQuarterCosts(54800000.0 / 4.0),
     yearCosts(54800000.0),
