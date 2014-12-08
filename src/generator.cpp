@@ -35,8 +35,8 @@ void Generator::Behavior(){
     int year = (int)(Time / YEAR);
     while (actualYear < year)
     {
-        // increase tons by 2% by every year
-        this->avgTons *= 1.02;
+        // increase tons by 2.5% by every year
+        this->avgTons *= 1.025;
         this-> nextShipTime = (YEAR) /  (this->avgTons / SHIP_CAPACITY);
         actualYear++;
     }

@@ -18,7 +18,7 @@ BIN_FOLDER = bin
 OBJ_FOLDER = obj
 
 ZIP_FILE = 02_xsevci50_xstrak25.zip
-PACKED_FILES = src/* inc/* Makefile README.md doc-DOL.pdf
+PACKED_FILES = src/* inc/* Makefile README.md report.pdf
 
 INCLUDES = -Iinc
 

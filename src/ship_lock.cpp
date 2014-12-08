@@ -36,7 +36,7 @@ void ShipLock::SailProcedure(Ship &s)
     Queue* myQueue = direction == Direction::ToEndpoint ? queueA[idx] : queueB[idx];
     Queue* oppositeQueue = direction == Direction::ToEndpoint ? queueB[idx] : queueA[idx];
 
-    double timeout = 900.0;
+    double timeout = 0.0;
 
     // If lock is already used or there is ship in my queue, queue up
     // If water level in chamber is wrong for this direction but lock is not used, queue up with timeout
